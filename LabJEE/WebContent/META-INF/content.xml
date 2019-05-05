@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<Context path="/LabJEE">
+
+<Resource name="jdbc/postgres" auth="Container"
+          type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://localhost:5432/labdb"
+          username="postgres" password="admin" maxActive="20" maxIdle="10" maxWait="10000"
+		removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true"/>
+</Context>
