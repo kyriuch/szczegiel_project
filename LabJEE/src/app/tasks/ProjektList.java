@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import app.model.Project;
 import app.util.HibernateUtil;
+import sun.security.ssl.Debug;
 
 /**
  * Servlet implementation class ProjektList
@@ -38,7 +39,41 @@ public class ProjektList extends HttpServlet {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = HibernateUtil.getInstance().createEntityManager();
 		
-		TypedQuery<Project> query = entityManager.createQuery("SELECT p FROM Project p", Project.class);
+		StringBuilder queryBuilder = new StringBuilder();
+		
+		queryBuilder.append("SELECT p FROM Project p");
+		
+		if(request.getParameter("btn_list") != null) {
+			
+			String projectId = request.getParameter("project_id");
+			
+			boolean whereAdded = false;
+			
+			if(projectId != null && !projectId.isEmpty()) {
+				try {
+					Integer pId = Integer.parseInt(projectId);
+					
+					queryBuilder.append(" WHERE p.projectId = ");
+					queryBuilder.append(pId);
+					whereAdded = true;
+				} catch(Exception e) {
+					
+				}
+			}
+			
+			String projectName = request.getParameter("project_name");
+			
+			if(projectName != null && !projectName.isEmpty()) {
+				if(!whereAdded)
+					queryBuilder.append(" WHERE ");
+				
+				queryBuilder.append("p.name LIKE '%");
+				queryBuilder.append(projectName);
+				queryBuilder.append("%'");
+			}
+		}
+		
+		TypedQuery<Project> query = entityManager.createQuery(queryBuilder.toString(), Project.class);
 		
 		List<Project> projects = query.getResultList();
 		request.setAttribute("projects", projects);

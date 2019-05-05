@@ -11,6 +11,12 @@
 <title>Lista projektów</title>
 </head>
 <body>
+	<form action="ProjektList" method="POST">
+		<h2>Wyszukaj</h2>
+		<input name="project_id" type="number" placeholder="Id projektu"/>
+		<input name="project_name" type="text" placeholder="Nazwa projektu"/>
+		<input name="btn_list" value="Wyszukaj" type="submit">
+	</form>
 	<h2>Lista projektów</h2>
 	<table border="1" cellpadding="3">
 		<tr>
