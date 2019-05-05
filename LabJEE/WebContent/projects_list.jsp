@@ -15,6 +15,13 @@
 		<h2>Wyszukaj</h2>
 		<input name="project_id" type="number" placeholder="Id projektu"/>
 		<input name="project_name" type="text" placeholder="Nazwa projektu"/>
+		Elementów na stronę: 
+		<select name="list_count">
+			<option value="0" selected>5</option>
+			<option value="1">10</option>
+			<option value="2">15</option>
+			<option value="3">20</option>
+		</select>
 		<input name="btn_list" value="Wyszukaj" type="submit">
 	</form>
 	<h2>Lista projektów</h2>
