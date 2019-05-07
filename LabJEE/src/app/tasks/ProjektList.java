@@ -1,6 +1,7 @@
 package app.tasks;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -36,13 +37,18 @@ public class ProjektList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		EntityManager entityManager = HibernateUtil.getInstance().createEntityManager();
 
 		StringBuilder queryBuilder = new StringBuilder();
-
 		queryBuilder.append("SELECT p FROM Project p");
 
 		boolean isFromButton = request.getParameter("btn_list") != null;
@@ -78,7 +84,7 @@ public class ProjektList extends HttpServlet {
 
 		TypedQuery<Project> query = entityManager.createQuery(queryBuilder.toString(), Project.class);
 
-		if(isFromButton) {
+		if (isFromButton) {
 			String limit = request.getParameter("list_count");
 
 			if (limit != null && !limit.isEmpty()) {
@@ -91,7 +97,6 @@ public class ProjektList extends HttpServlet {
 				}
 			}
 		}
-		
 
 		List<Project> projects = query.getResultList();
 		request.setAttribute("projects", projects);
@@ -100,15 +105,4 @@ public class ProjektList extends HttpServlet {
 		RequestDispatcher dispatcher = context.getRequestDispatcher("/projects_list.jsp");
 		dispatcher.forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

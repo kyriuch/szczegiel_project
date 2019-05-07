@@ -25,6 +25,7 @@
 		<input name="btn_list" value="Wyszukaj" type="submit">
 	</form>
 	<h2>Lista projektów</h2>
+	<a href="project_form.jsp"><h3>Dodaj projekt</h3></a>
 	<table border="1" cellpadding="3">
 		<tr>
 			<th>Lp.</th>
@@ -48,10 +49,11 @@
 				<javatime:format value="${project.returnDate}" var="fmtDataOddania"
 					pattern="yyyy-MM-dd" />
 				<td><c:out value="${fmtDataOddania}" /></td>
-				<c:url value="/pages/zadania.jsp" var="linkZadaniaProjektu">
-					<c:param name="x_projekt_id" value="${projekt.projectId}" />
-				</c:url>
-				<td><a href='<c:out value="${linkZadaniaProjektu}" />'>Zadania</a></td>
+				<td>
+					<a href="TasksList?id=${projekt.projectId}">Zadania</a></br>
+					<a href="ProjectController?action=edit&id=${projekt.projectId}">Edycja</a></br>
+					<a href="ProjectController?action=delete&id=${projekt.projectId}" onClick="return confirm('Na pewno chcesz usunąć projekt?')">Usuń</a></br>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
