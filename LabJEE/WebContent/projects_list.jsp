@@ -46,7 +46,7 @@
 				<javatime:format value="${projekt.creationDate}"
 					var="fmtDataczasUtworzenia" pattern="yyyy-MM-dd hh:mm:ss" />
 				<td><c:out value="${fmtDataczasUtworzenia}" /></td>
-				<javatime:format value="${project.returnDate}" var="fmtDataOddania"
+				<javatime:format value="${projekt.returnDate}" var="fmtDataOddania"
 					pattern="yyyy-MM-dd" />
 				<td><c:out value="${fmtDataOddania}" /></td>
 				<td>

@@ -49,7 +49,7 @@ public class ProjektList extends HttpServlet {
 		EntityManager entityManager = HibernateUtil.getInstance().createEntityManager();
 
 		StringBuilder queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT p FROM Project p");
+		queryBuilder.append("SELECT p FROM Project p ORDER BY p.projectId");
 
 		boolean isFromButton = request.getParameter("btn_list") != null;
 
