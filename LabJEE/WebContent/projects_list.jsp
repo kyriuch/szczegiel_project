@@ -13,17 +13,28 @@
 <body>
 	<form action="ProjektList" method="POST">
 		<h2>Wyszukaj</h2>
-		<input name="project_id" type="number" placeholder="Id projektu"/>
-		<input name="project_name" type="text" placeholder="Nazwa projektu"/>
-		Elementów na stronę: 
-		<select name="list_count">
-			<option value="0" selected>5</option>
-			<option value="1">10</option>
-			<option value="2">15</option>
-			<option value="3">20</option>
+		<input name="project_id" type="number" placeholder="Id projektu"
+			value="<%=request.getAttribute("pId")%>" /> <input
+			name="project_name" type="text" placeholder="Nazwa projektu"
+			value="<%=request.getAttribute("projectName") == null ? "" : request.getAttribute("projectName")%>" />
+		Elementów na stronę: <select name="list_count">
+			<option value="0"
+				<c:if test="${requestScope.list_count eq 5}">selected</c:if>>5</option>
+			<option value="1"
+				<c:if test="${requestScope.list_count eq 10}">selected</c:if>>10</option>
+			<option value="2"
+				<c:if test="${requestScope.list_count eq 15}">selected</c:if>>15</option>
+			<option value="3"
+				<c:if test="${requestScope.list_count eq 20}">selected</c:if>>20</option>
 		</select>
-		<input name="btn_list" value="Wyszukaj" type="submit">
+		<c:if test="${requestScope.page_number != 1}">
+			<input name="prev" value="Back" type="submit">
+		</c:if>
+		<input name="page_number" type="hidden" value="<%=request.getAttribute("page_number")%>" /> 
+		<input name="btn_list" value="Wyszukaj" type="submit" />
+		<input name="next" value="Next" type="submit">
 	</form>
+
 	<h2>Lista projektów</h2>
 	<a href="project_form.jsp"><h3>Dodaj projekt</h3></a>
 	<table border="1" cellpadding="3">
@@ -49,10 +60,10 @@
 				<javatime:format value="${projekt.returnDate}" var="fmtDataOddania"
 					pattern="yyyy-MM-dd" />
 				<td><c:out value="${fmtDataOddania}" /></td>
-				<td>
-					<a href="TasksList?id=${projekt.projectId}">Zadania</a></br>
-					<a href="ProjectController?action=edit&id=${projekt.projectId}">Edycja</a></br>
-					<a href="ProjectController?action=delete&id=${projekt.projectId}" onClick="return confirm('Na pewno chcesz usunąć projekt?')">Usuń</a></br>
+				<td><a href="TasksList?id=${projekt.projectId}">Zadania</a></br> <a
+					href="ProjectController?action=edit&id=${projekt.projectId}">Edycja</a></br>
+					<a href="ProjectController?action=delete&id=${projekt.projectId}"
+					onClick="return confirm('Na pewno chcesz usunąć projekt?')">Usuń</a></br>
 				</td>
 			</tr>
 		</c:forEach>
