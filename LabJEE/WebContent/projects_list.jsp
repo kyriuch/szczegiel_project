@@ -34,6 +34,8 @@
 		<input name="btn_list" value="Wyszukaj" type="submit" />
 		<input name="next" value="Next" type="submit">
 	</form>
+	
+	<a href="index.html"><h3>Chat</h3></a>
 
 	<h2>Lista projektów</h2>
 	<a href="project_form.jsp"><h3>Dodaj projekt</h3></a>
@@ -60,8 +62,9 @@
 				<javatime:format value="${projekt.returnDate}" var="fmtDataOddania"
 					pattern="yyyy-MM-dd" />
 				<td><c:out value="${fmtDataOddania}" /></td>
-				<td><a href="TasksList?id=${projekt.projectId}">Zadania</a></br> <a
-					href="ProjectController?action=edit&id=${projekt.projectId}">Edycja</a></br>
+				<td><a href="TasksList?id=${projekt.projectId}">Zadania</a></br> 
+					<a href="room/${projekt.projectId}">Czat</a></br>
+					<a href="ProjectController?action=edit&id=${projekt.projectId}">Edycja</a></br>
 					<a href="ProjectController?action=delete&id=${projekt.projectId}"
 					onClick="return confirm('Na pewno chcesz usunąć projekt?')">Usuń</a></br>
 				</td>
